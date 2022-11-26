@@ -14,8 +14,10 @@ require('mason-lspconfig').setup_handlers({ function(server)
   require('lspconfig')[server].setup(opt)
 end })
 require("mason-lspconfig").setup({
-    ensure_installed = { "sumneko_lua", "rust_analyzer" }
+    ensure_installed = { "sumneko_lua", "rust_analyzer", "gopls" }
 })
+
+-- "rustfmt", "delve"
 -- for other LSP server, see
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 
