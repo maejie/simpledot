@@ -26,7 +26,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- New tab
 keymap("n", "te", ":tabedit", opts)
--- 新しいタブを一番右に作る
+-- Make new tab on the very right
 keymap("n", "gn", ":tabnew<Return>", opts)
 -- move tab
 keymap("n", "gh", "gT", opts)
@@ -50,10 +50,8 @@ vim.api.nvim_create_user_command(
 keymap("n", "ss", ":VsplitOrWincmdw<CR>", opts)
 
 -- Open explorer(netrw)
-keymap("n", "-", ":Ex<CR>", opts)
-
--- Select all
-keymap("n", "<C-a>", "gg<S-v>G", opts)
+-- keymap("n", "-", ":Ex<CR>", opts)
+keymap("n", "-", ":NeoTreeShow<CR>", opts)
 
 -- Do not yank with x
 keymap("n", "x", '"_x', opts)
@@ -61,19 +59,12 @@ keymap("n", "x", '"_x', opts)
 -- Delete a word backwards
 keymap("n", "dw", 'vb"_d', opts)
 
--- 行の端に行く
-keymap("n", "<Space>h", "^", opts)
-keymap("n", "<Space>l", "$", opts)
-
--- ESC*2 でハイライトやめる
+-- Escape twice de-highlight for the searched word
 keymap("n", "<Esc><Esc>", ":<C-u>set nohlsearch<Return>", opts)
 
 -- Insert --
 -- Press jj fast to exit insert mode
 keymap("i", "jj", "<ESC>", opts)
-
--- コンマの後に自動的にスペースを挿入
-keymap("i", ",", ",<Space>", opts)
 
 -- Visual --
 -- Stay in indent mode
