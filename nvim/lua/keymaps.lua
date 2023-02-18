@@ -4,11 +4,6 @@ local term_opts = { silent = true }
 --local keymap = vim.keymap
 local keymap = vim.api.nvim_set_keymap
 
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Modes
 --   normal_mode = 'n',
 --   insert_mode = 'i',
@@ -73,3 +68,25 @@ keymap("v", ">", ">gv", opts)
 
 -- 0番レジスタを使いやすくした
 keymap("v", "<C-p>", '"0p', opts)
+
+-------------------------------------------------------------------------------
+-- Remap space as leader key
+keymap("", "<Space>", "<Nop>", opts)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- for telescope(fuzzy finder)
+-- https://github.com/nvim-telescope/telescope.nvim#usage
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+-- Telescppe LSP integration
+-- https://github.com/nvim-telescope/telescope.nvim#neovim-lsp-pickers
+vim.keymap.set('n', '<leader>fr', builtin.lsp_references, {})
+vim.keymap.set('n', '<leader>fi', builtin.lsp_incoming_calls, {})
+vim.keymap.set('n', '<leader>fo', builtin.lsp_outgoing_calls, {})
+vim.keymap.set('n', '<leader>fd', builtin.lsp_definitions, {})
+

@@ -14,7 +14,7 @@ require('mason-lspconfig').setup_handlers({ function(server)
   require('lspconfig')[server].setup(opt)
 end })
 require("mason-lspconfig").setup({
-    ensure_installed = { "sumneko_lua", "rust_analyzer", "gopls" }
+    ensure_installed = { "sumneko_lua", "gopls", "terraformls" }
 })
 
 -- "rustfmt", "delve"

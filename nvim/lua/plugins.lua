@@ -81,8 +81,7 @@ return packer.startup(function(use)
     config = function() require('gitsigns').setup() end
   })
   use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
-  use({
-  'pwntester/octo.nvim',
+  use({ 'pwntester/octo.nvim',
   requires = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope.nvim',
@@ -124,11 +123,40 @@ return packer.startup(function(use)
 	use({ "j-hui/fidget.nvim" , config = function() require('fidget').setup() end}) -- Show the status of LSP
 	use({ "simrat39/rust-tools.nvim" }) -- Rust tools
 
+	-- Testing
+  use({ "klen/nvim-test",
+    config = function()
+      require('nvim-test').setup({
+        runners = {
+          go = "nvim-test.runners.go-test"
+        }
+      })
+    end
+  })
+
 	-- Debugging
-  use({ "mfussenegger/nvim-dap" })
-  use({ "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} })
-  use({ "leoluz/nvim-dap-go" })
-  use({ "theHamsta/nvim-dap-virtual-text" })
+  use({ "mfussenegger/nvim-dap"})
+  use({ "rcarriga/nvim-dap-ui",
+    requires = {"mfussenegger/nvim-dap"},
+    config = function()
+      local dapui = require('dapui')
+      dapui.setup()
+      local dap = require('dap')
+      dap.listeners.before['event_initialized']['custom'] = function(session, body)
+        dapui.open()
+      end
+      dap.listeners.before['event_terminated']['custom'] = function(session, body)
+        dapui.close()
+      end
+    end
+  })
+  use({ "leoluz/nvim-dap-go",
+    requires = {"mfussenegger/nvim-dap"},
+    config = function() require('dap-go').setup() end
+  })
+  use({ "theHamsta/nvim-dap-virtual-text",
+    config = function() require('nvim-dap-virtual-text').setup() end
+  })
 
 	-- Formatter
 	use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
